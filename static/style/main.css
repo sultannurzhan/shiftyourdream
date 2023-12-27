@@ -1,0 +1,46 @@
+body {
+    background-image: url('style-images/wallpaper-phone.webp');
+    background-repeat: no-repeat;
+    background-size: cover; /* This will make the background image cover the entire viewport */
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.centerbox {
+    margin: auto;
+}
+
+.vertical-center{
+    margin-top: 10%;
+}
+
+.vertical-home{
+    margin-top: 5%;
+}
+
+
+.title{
+    font-family: 'Satisfy', cursive;
+    font-size: 50px;
+}
+
+.bg-own-main{
+    background: #AC87C5 !important;
+}
+
+.bg-own-secondary{
+    background: #756AB6 !important; 
+}
+
+.bg-own-pink{
+    background: #E0AED0 !important;
+}
+
+.btn-own-long{
+    width: 100%;
+}
+
+.btn-own-half{
+    width: 47%;
+}
+

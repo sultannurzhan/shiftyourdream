@@ -1,0 +1,25 @@
+@media only screen and (max-width: 767px) {
+    body {
+        background-size: 200vh; /* Ensure full height coverage on smaller screens */
+        background-repeat: no-repeat;
+        background-size: cover; /* This will make the background image cover the entire viewport */
+        background-position: center;
+    }
+
+    .centerbox{
+        position: absolute;
+        width: 80%;
+    }
+
+    .title{
+        font-family: 'Satisfy', cursive;
+        font-size: 35px;
+    }
+
+    .vertical-center{
+        margin-top: 30%;
+    }
+    .vertical-home{
+        margin-top: 20%;
+    }
+}
