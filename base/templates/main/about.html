@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'style/note.css' %}">
+<link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
+
+<style>
+    .title-about{
+        font-size: 35px !important; 
+        margin-left: 15px !important;
+    }
+
+    .title-name{
+        font-size: 40px !important; 
+        margin-left: 15px !important;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .title-about{
+        font-size: 20px !important; 
+        margin-left: 15px !important;
+        }
+
+    .title-name{
+        font-size: 20px !important; 
+        margin-left: 15px !important;
+        }
+    }
+
+</style>
+
+<div class="container">
+    <section class="p-4 text-black vertical-home">
+        
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-7 bg-white p-lg-5 p-4 rounded">
+                <h2 class="text-lg-center title-about">About<span class="title title-name">ShiftYourDream</span></b></h2>
+                <br>
+                <p>Welcome to ShiftYourDream, a platform designed to transform your dreams into organized narratives. At ShiftYourDream, we believe that dreams are powerful sources of inspiration and creativity. Our simple and effective website allows users to capture and organize their dreams, providing a unique space to explore the subconscious mind.</p>
+                <br><hr><br>
+                <h4>Founder</h4>
+                <p>ShiftYourDream was founded by <a href="https://sultanti.web.app/about.html" target="_blank" class="text-decoration-none text-danger">Takibay Sultan</a>, a dedicated web developer currently pursuing studies at Pusan National University in South Korea. Takibay Sultan's passion for web development and the exploration of the human mind inspired the creation of this platform in December 2023.</p>
+                <br><hr><br>
+                <h4>Technology Stack</h4>
+                <p>ShiftYourDream is built on a robust technological foundation, utilizing a combination of cutting-edge tools and frameworks to provide a seamless user experience. The technologies employed include:</p>
+                <ul>
+                    <li><b>Python (Django Framework):</b> Empowering the backend with a powerful and scalable framework.</li>
+                    <li><b>JavaScript, HTML, CSS:</b> Crafting an interactive and visually appealing user interface.</li>
+                    <li><b>jQuery, Ajax:</b>Enhancing user interactions and dynamic content loading.</li>
+                    <li><b>Bootstrap:</b>Ensuring a responsive and modern design across devices.</li>
+                    <li>SQLite:<b></b>Managing the database efficiently.</li>
+                </ul>
+                <br><hr><br>
+                <h4>Vision</h4>
+                <p>Our vision at ShiftYourDream is to offer users a space to not only record their dreams but to understand and organize the narratives that unfold during sleep. We believe in the transformative power of dreams and aim to provide a platform that fosters self-reflection and creativity.</p>
+                <p>Join us on this journey of exploration and self-discovery. Start capturing your dreams today with ShiftYourDream!</p>
+            </div>
+        </div>
+
+    </section>
+    
+
+    <script src="{% static 'javascript/note.js' %}"></script>
+</div>
+
+
+
+{% endblock content %}

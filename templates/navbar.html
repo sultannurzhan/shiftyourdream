@@ -42,6 +42,10 @@
                             <a href="{% url 'dreams' %}" class="nav-link {% if request.resolver_match.url_name == 'dreams' %}active{% endif %}">Dreams</a>
                         </li>
 
+                        <li class="nav-item ms-lg-2">
+                            <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+                        </li>
+
                         <li class="nav-item ms-lg-4">
                             <form class="d-none d-md-block">
                                 <form method="GET" action="{% url 'home' %}">
