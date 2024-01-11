@@ -69,6 +69,10 @@ class RegisterUser(View):
             form = RegisterUserForm()
             return render(request, 'main/login_register.html', {'form' : form})
 
+class Default(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'main/default.html', context)
 
 class Home(LoginRequiredMixin, View):
     login_url = 'login'
@@ -166,3 +170,9 @@ def edit_note(request, pk):
 
 
     return render(request, 'main/home.html', {'form': form, 'note_id': note.id})
+
+
+class About(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'main/about.html', context)

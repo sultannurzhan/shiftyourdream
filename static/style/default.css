@@ -1,0 +1,87 @@
+body{
+    background-color: white !important;
+}
+
+.title{
+    font-family: 'Satisfy', cursive;
+    font-size: 25px;
+}
+
+.bg-own-main{
+    background: #AC87C5 !important;
+}
+
+.bg-own-secondary{
+    background: #756AB6 !important; 
+}
+
+.bg-own-pink{
+    background: #E0AED0 !important;
+}
+
+.btn-own-long{
+    width: 100%;
+}
+
+.btn-own-half{
+    width: 47%;
+}
+
+.btn-own-full{
+    width: 70%;
+}
+
+.color-own-main{
+    color: #AC87C5 !important;
+}
+
+.color-own-secondary{
+    color: #756AB6 !important;
+}
+
+.login-button{
+    width: 150px !important;
+    border-radius: 10px !important;
+}
+
+.main-text{
+    font-size: 50px;
+    font-weight: 700 !important;
+}
+
+.main-content{
+    margin-top: 150px;
+    margin-left: 20%;
+    margin-right: 20%;
+    line-height: normal;
+}
+
+@media only screen and (max-width: 767px) {
+    .main-content{
+        margin-top: 100px;
+        margin-left: 5%;
+        margin-right: 5%;
+        line-height: normal;
+    }
+
+    .main-text-content-outside{
+        display: flex; 
+        flex-direction: row; 
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .main-text-content-inside{
+        width: 50%;
+    }
+
+    .btn-own-full{
+        width: 100%;
+    }
+
+    .login-button{
+        width: 100px !important;
+        border-radius: 10px !important;
+    }
+    
+}
