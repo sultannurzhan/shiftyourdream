@@ -11,6 +11,10 @@ body {
 }
 
 .vertical-home{
+    margin-top: 0%;
+}
+
+.vertical-dreams{
     margin-top: 5%;
 }
 
@@ -42,4 +46,25 @@ body {
 
 .maincontainer{
     width: 75% !important;
+}
+
+.bg-important{
+    background-color: #E4B77D !important;
+}
+
+
+
+.btn-own-main{
+    background-color: #AC87C5 !important;
+    color: white !important;
+}
+
+.btn-own-outline-main{
+    border-color: #AC87C5 !important;
+    color: black !important;
+}
+
+.btn-own-outline-main:hover{
+    background-color: #AC87C5 !important;
+    color: white !important;
 }

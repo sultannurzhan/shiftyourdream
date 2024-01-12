@@ -22,7 +22,7 @@
                         <p class="">{{note.body|linebreaks}}</p>
                     </div>
                 </div>
-                <div class="box-own-date d-flex justify-content-between">
+                <div class="box-own-date d-flex justify-content-between {% if note.important == True %} bg-important {% endif %}">
                     <div class="">
                         <p class="">{{note.updated}}</p>
                     </div>

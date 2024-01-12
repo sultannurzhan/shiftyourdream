@@ -5,12 +5,12 @@
 <link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
 
 <div class="container maincontainer">
-    <section class="pt-lg-5 pt-0 px-lg-0 p-4 text-black vertical-home">
+    <section class="pt-lg-5 pt-0 px-lg-0 p-4 text-black vertical-dreams">
         <!--SORT-->
         <div class="d-flex flex-column flex-sm-row ms-lg-5">
-            <a class="{% if sort_query == '' %}btn btn-dark bg-own-main{% else %}btn btn-outline-dark{% endif %} my-2 mx-2" href="{% url 'dreams' %}">Created</a>
-            <a class="{% if sort_query == 'Modified' %}btn btn-dark bg-own-main{% else %}btn btn-outline-dark{% endif %} my-2 mx-2" href="{% url 'dreams' %}?sq=Modified">Modified</a>
-            <a class="{% if sort_query == 'Important' %}btn btn-dark bg-own-main{% else %}btn btn-outline-dark{% endif %} my-2 mx-2" href="{% url 'dreams' %}?sq=Important">Important</a>
+            <a class="{% if sort_query == '' %}btn  btn-own-main {% else %}btn btn-own-outline-main{% endif %} my-2 mx-2" href="{% url 'dreams' %}">Created</a>
+            <a class="{% if sort_query == 'Modified' %}btn btn-own-main bg-own-main{% else %}btn btn-own-outline-main{% endif %} my-2 mx-2" href="{% url 'dreams' %}?sq=Modified">Modified</a>
+            <a class="{% if sort_query == 'Important' %}btn btn-own-main bg-own-main{% else %}btn btn-own-outline-main{% endif %} my-2 mx-2" href="{% url 'dreams' %}?sq=Important">Important</a>
         </div>
         <!--END OF SORT-->
         <div class="row ">
@@ -22,7 +22,7 @@
                         <p class="">{{note.body|linebreaks}}</p>
                     </div>
                 </div>
-                <div class="box-own-date d-flex justify-content-between">
+                <div class="box-own-date d-flex justify-content-between {% if note.important == True %} bg-important {% endif %}">
                     <div class="">
                         <p class="">{{note.updated}}</p>
                     </div>
