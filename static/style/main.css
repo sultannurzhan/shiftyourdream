@@ -40,3 +40,6 @@ body {
     width: 47%;
 }
 
+.maincontainer{
+    width: 75% !important;
+}

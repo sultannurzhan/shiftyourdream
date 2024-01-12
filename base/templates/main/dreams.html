@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="{% static 'style/note.css' %}">
 <link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
 
-<div class="container">
-    <section class="p-4 text-black vertical-home">
+<div class="container maincontainer">
+    <section class="pt-5 px-lg-0 p-4 text-black vertical-home">
         <!--SORT-->
         <div class="d-flex flex-column flex-sm-row ms-lg-5">
             <a class="{% if sort_query == '' %}btn btn-dark bg-own-main{% else %}btn btn-outline-dark{% endif %} my-2 mx-2" href="{% url 'dreams' %}">Created</a>

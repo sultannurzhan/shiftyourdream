@@ -15,4 +15,8 @@
     .vertical-home{
         margin-top: 20%;
     }
+
+    .maincontainer{
+        width: 100% !important;
+    }
 }
