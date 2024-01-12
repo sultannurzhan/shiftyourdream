@@ -77,9 +77,7 @@ class Default(View):
 class Home(LoginRequiredMixin, View):
     login_url = 'login'
     def get(self, request):
-        #q = request.GET.get('q') if request.GET.get('q') != None else ''
         search_query = request.GET.get('q', '')
-
         notes = Note.objects.filter(user=request.user).filter(
             Q(title__icontains=search_query)|
             Q(body__icontains=search_query)
@@ -118,8 +116,8 @@ def create_note(request):
         user = request.user
         title = request.POST.get('title')
         body = request.POST.get('body')
-        important = request.POST.get('important') == 'true'  # Convert the string to a boolean
-        note = Note.objects.create(user=user, title=title, body=body, important=important)  # Update Note creation
+        important = request.POST.get('important') == 'true' 
+        note = Note.objects.create(user=user, title=title, body=body, important=important)  
         print(request.POST.get('important'))
         note_data = {
             'id': note.id,
@@ -128,7 +126,7 @@ def create_note(request):
             'created': note.created,
             'updated': note.updated,
             'user_id': note.user.id,
-            'important': note.important,  # Include the important field in the response
+            'important': note.important,  
         }
         return JsonResponse(note_data)
     else:
@@ -167,7 +165,6 @@ def edit_note(request, pk):
     else:
         initial_important = note.important
         form = NoteForm(instance=note, initial={'important': initial_important})
-
 
     return render(request, 'main/home.html', {'form': form, 'note_id': note.id})
 

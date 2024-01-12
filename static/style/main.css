@@ -1,9 +1,5 @@
 body {
-    background-image: url('style-images/wallpaper-phone.webp');
-    background-repeat: no-repeat;
-    background-size: cover; /* This will make the background image cover the entire viewport */
-    background-position: center;
-    background-attachment: fixed;
+    background: #edeef0 !important;
 }
 
 .centerbox {
