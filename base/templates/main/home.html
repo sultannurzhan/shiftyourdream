@@ -4,16 +4,15 @@
 <link rel="stylesheet" href="{% static 'style/note.css' %}">
 <link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
 
-<div class="container">
-    <section class="p-4 text-black vertical-home">
-        <div class="row ">
+<div class="container w-75">
+    <section class="pt-5 text-black vertical-home">
+        <div class="row">
             <div class="col-lg-2 wrapper">
               <li class="add-box" data-bs-toggle="modal" data-bs-target="#addNote">
                   <div class="icon"><i class="uil uil-plus"></i></div>
                   <p>Add new dream</p>
               </li>       
             </div>
-
             {% for note in notes %}
             <div class="col-lg-2 wrapper" id="note-{{note.id}}">
                 <div class="box-own-note">
