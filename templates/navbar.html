@@ -1,18 +1,10 @@
 {% load static %}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar border-bottom">
+    <div class="container top-navbar-container">
+        <div class="d-md-flex justify-content-md-left w-100">
 
-
-<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-    
-    <div class="container" id="navbarTogglerDemo03">
-
-        <div class="d-md-flex justify-content-md-center w-100">
-        
-            <div class="d-flex justify-content-between ms-lg-0 ms-4">
-                <a href="{% url 'home' %}" class="navbar-brand title" id="logo">
-                <!--<img src="{% static 'images/logo.png' %}" style="height:50px; width: 130px;">-->
-                Shift Your Dream
-                </a>
+            <div class="d-lg-none d-flex justify-content-left">
 
                 <button 
                 class="navbar-toggler" 
@@ -21,76 +13,150 @@
                 data-bs-target="#navmenu"
                 >
                 <span class="navbar-toggler-icon"></span>
-                </button>                
+                </button>  
+
+                <a href="{% url 'home' %}" class="navbar-brand title ms-3" id="logo">
+                Shift Your Dream
+                </a>              
             </div>
             
 
-            <div class="">
+            <div class="collapse navbar-collapse ms-lg-0 ms-4" id="navmenu">
 
-
-                <div class="collapse navbar-collapse ms-lg-0 ms-4" id="navmenu">
+                <!--For Big Screens-->
+                <div class="d-none d-lg-block">
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
-                            <a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">                      
-                                Home
+                            <a href="{% url 'home' %}" class="nav-link btn btn-own-outline-secondary {% if request.resolver_match.url_name == 'home' %} btn-own-secondary text-white {% endif %} py-1">                      
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>
                             </a>
                         </li>
 
-                        
                         <li class="nav-item ms-lg-2">
-                            <a href="{% url 'dreams' %}" class="nav-link {% if request.resolver_match.url_name == 'dreams' %}active{% endif %}">Dreams</a>
-                        </li>
-
-                        <li class="nav-item ms-lg-2">
-                            <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
-                        </li>
-
-                        <li class="nav-item ms-lg-4">
-                            <form class="d-none d-md-block">
-                                <form method="GET" action="{% url 'home' %}">
-                                    <input type="text" name="q" placeholder="Search Dreams" autocomplete="off" class="form-control me-5"/>
-                                </form>
-                            </form>  
-                        </li>
-                        
-                    
-                        {% if request.user.is_authenticated %}
-
-
-                        <li class="nav-item ms-lg-2">
-                            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
-                        </li>
-
-
-                        {% else %}
-
-                        <li class="nav-item d-none d-md-block" style="width: 100px">
-                            <!--invisible block to help to move login and register to the right side of the navbar-->
-                        </li>
-                        
-
-                        <li class="nav-item ms-lg-5">
-                            <a href="{% url 'login' %}" class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}">Login</a> 
+                            <a href="{% url 'dreams' %}" class="nav-link btn btn-own-outline-secondary {% if request.resolver_match.url_name == 'dreams' %} btn-own-secondary text-white {% endif %} py-1">
+                                <span class="material-symbols-outlined">
+                                    sticky_note_2
+                                </span>
+                            </a>
                         </li>
 
                         <li class="nav-item ms-lg-2">
-                            <a href="{% url 'register' %}" class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register</a> 
+                            <form class="s" method="GET" action="{% url 'home' %}">
+                                <div class="input-group">
+                                    <input type="text" name="q" placeholder="Search Dreams" autocomplete="off" class="form-control"/>
+                                </div>
+                            </form>                            
+                        </li>
+                            
+                    </ul>
+                </div>
+
+                <!--For Mobile Screens-->
+                <div class="d-lg-none d-block">
+                    <ul class="navbar-nav ms-4 mt-4">
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        home
+                                    </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="{% url 'home' %}">
+                                    Home
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        sticky_note_2
+                                    </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="{% url 'dreams' %}">
+                                    Dreams
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        dashboard
+                                    </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="#">
+                                    Dashboard
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        notifications
+                                        </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="#">
+                                    Notifications
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        emoji_events
+                                        </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="#">
+                                    Achievements
+                                </a>
+                            </div>
                         </li>
 
-                        {% endif %}
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="#">
+                                    <span class="material-symbols-outlined">
+                                        settings
+                                        </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="#">
+                                    Settings
+                                </a>
+                            </div>
+                        </li>
 
+                        <hr class="w-75">
 
-                        
+                        <li class="nav-item p-3">
+                            <div class="d-flex justify-content-left">
+                                <a class="nav-link active text-dark p-0" href="{% url 'logout' %}">
+                                    <span class="material-symbols-outlined">
+                                        logout
+                                        </span>
+                                </a>
+                                <a class="nav-link active text-dark p-0 ps-2" href="{% url 'logout' %}">
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
                     </ul>
 
-                </div> 
-            </div>
 
+
+                </div>
+
+
+
+            </div> 
 
         </div>
-
     </div>
-
 </nav>
 

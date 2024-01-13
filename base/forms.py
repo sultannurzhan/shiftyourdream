@@ -5,19 +5,19 @@ from .models import *
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(
-        label=False,  # Set label to False to remove it
+        label="Username",
         strip=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
+        widget=forms.TextInput(attrs={'class': 'form-control bg-light border-0 py-2', 'placeholder': 'Enter your username'}),
     )
     password1 = forms.CharField(
-        label=False,  # Set label to False to remove it
+        label="Password",  
         strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Password'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control bg-light border-0 py-2', 'placeholder': 'Enter your password'})
     )
     password2 = forms.CharField(
-        label=False,  # Set label to False to remove it
+        label="Confirm Password",  
         strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Password confirmation'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control  bg-light border-0 py-2', 'placeholder': 'Confirm your password'})
     )
 
 

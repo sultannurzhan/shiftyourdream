@@ -1,7 +1,7 @@
 import json
 import re
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.views import View
 from .forms import *
 from django.contrib.auth.decorators import login_required
@@ -46,28 +46,36 @@ class LoginUser(View):
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('default')
 
 class RegisterUser(View):
     def get(self, request):
         if request.user.is_authenticated:
             return redirect('home')
-        form = RegisterUserForm()
-        return render(request, 'main/login_register.html', {'form' : form})
+        return render(request, 'main/login_register.html')
 
     @csrf_exempt
     def post(self, request):
-        form = RegisterUserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit = False)
-            user.username = user.username.lower()
-            user.save()
+        username = request.POST.get('username')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        if not username or not password1 or not password2:
+            messages.error(request, 'Please fill in all fields.')
+            return render(request, 'main/login_register.html')
+
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'main/login_register.html')
+
+        try:
+            user = User.objects.create_user(username=username, password=password1)
             login(request, user)
             return redirect('home')
-        else:
-            messages.error(request, 'Error occured during registration')
-            form = RegisterUserForm()
-            return render(request, 'main/login_register.html', {'form' : form})
+        except Exception as e:
+            messages.error(request, f'Error occurred during registration: {e}')
+
+        return render(request, 'main/login_register.html')
 
 class Default(View):
     def get(self, request):
@@ -160,13 +168,14 @@ def edit_note(request, pk):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
-            home_url = reverse('home')
-            return redirect(f'{home_url}#note-{note.id}')
+            current_url = request.POST.get('current_url')
+            return redirect(current_url)
+
     else:
         initial_important = note.important
         form = NoteForm(instance=note, initial={'important': initial_important})
 
-    return render(request, 'main/home.html', {'form': form, 'note_id': note.id})
+    return render(request, 'your_template.html', {'form': form, 'note_id': note.id})
 
 
 class About(View):

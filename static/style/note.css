@@ -13,9 +13,9 @@
 }
 .wrapper{
   margin-right: 50px;
-  margin-top: 50px;
+  margin-top: 10px;
   margin-left: 50px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 265px);
 }

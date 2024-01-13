@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'secondary.html' %}
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'style/note.css' %}">
@@ -34,7 +34,7 @@
         
         <div class="d-flex justify-content-center">
             <div class="col-lg-7 bg-white p-lg-5 p-4 rounded">
-                <h2 class="text-lg-center title-about">About<span class="title title-name">ShiftYourDream</span></b></h2>
+                <h2 class="text-lg-center title-about">About<a href="{% url 'default' %}" class="title title-name text-dark">ShiftYourDream</a></b></h2>
                 <br>
                 <p>Welcome to ShiftYourDream, a platform designed to transform your dreams into organized narratives. At ShiftYourDream, we believe that dreams are powerful sources of inspiration and creativity. Our simple and effective website allows users to capture and organize their dreams, providing a unique space to explore the subconscious mind.</p>
                 <br><hr><br>

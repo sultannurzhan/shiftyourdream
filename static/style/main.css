@@ -1,9 +1,15 @@
 body {
     background: #edeef0 !important;
+    overflow: hidden;
+}
+
+a{
+    text-decoration: none !important;
 }
 
 .centerbox {
     margin: auto;
+    width: 25%;
 }
 
 .vertical-center{
@@ -15,13 +21,13 @@ body {
 }
 
 .vertical-dreams{
-    margin-top: 5%;
+    margin-top: 1%;
 }
 
 
 .title{
     font-family: 'Satisfy', cursive;
-    font-size: 50px;
+    font-size: 35px;
 }
 
 .bg-own-main{
@@ -36,16 +42,40 @@ body {
     background: #E0AED0 !important;
 }
 
+.bg-own-light{
+    background: #f9f9fe !important;
+}
+
+.bg-own-grey{
+    background: #9CA3AF !important;
+}
+
+.text-own-main{
+    color: #AC87C5 !important;
+}
+
+.text-own-secondary{
+    color: #756AB6 !important;
+}
+
+.text-own-pink{
+    color: #E0AED0 !important;
+}
+
+.text-own-light{
+    color: #f9f9fe !important;
+}
+
+.text-own-grey{
+    color: #9CA3AF !important;
+}
+
 .btn-own-long{
     width: 100%;
 }
 
 .btn-own-half{
     width: 47%;
-}
-
-.maincontainer{
-    width: 75% !important;
 }
 
 .bg-important{
@@ -67,4 +97,32 @@ body {
 .btn-own-outline-main:hover{
     background-color: #AC87C5 !important;
     color: white !important;
+}
+
+.btn-own-secondary{
+    background-color: #756AB6 !important;
+}
+
+.btn-own-outline-secondary{
+    border-color: #756AB6 !important;
+    color: #756AB6 !important;
+}
+
+.btn-own-outline-secondary:hover{
+    background-color: #756AB6 !important;
+    color: white !important;
+}
+
+
+.maincontainer{
+    width: 95% !important;
+}
+
+.form-control::placeholder{
+    color: #9CA3AF !important;
+}
+
+.form-control:focus {
+    border-color: #AC87C5 !important;
+    box-shadow: 0 0 0 0.25rem #756AB6 !important;
 }

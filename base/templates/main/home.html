@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="{% static 'style/note.css' %}">
 <link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
 
-<div class="container maincontainer">
-    <section class="pt-5 px-lg-0 p-4 text-black vertical-home">
+<div class="maincontainer">
+    <section class="px-lg-0 p-4 text-black vertical-home">
         <div class="row">
             <div class="col-lg-2 wrapper">
               <li class="add-box" data-bs-toggle="modal" data-bs-target="#addNote">
@@ -118,10 +118,13 @@
                 <div class="modal-body">
                     <form method="post" action="" id="editNoteForm">
                         {% csrf_token %}
-
+                        
+                        <!-- Hidden input for the current page's URL -->
+                        <input type="hidden" name="current_url" value="{{ request.get_full_path }}">
+                        
                         <input type="text" name="title" id="editTitle" class="form-control" placeholder="Title">
                         <textarea name="body" id="editBody" class="form-control mt-2" rows="5" placeholder="Your dream goes here..." required></textarea>
-
+                        
                         <!-- Checkbox for important field -->
                         <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" name="important" id="editImportant">
@@ -129,7 +132,7 @@
                                 Mark as Important
                             </label>
                         </div>
-
+                        
                         <div class="d-flex mt-2">
                             <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-light bg-own-main text-white ms-3">Save Changes</button>

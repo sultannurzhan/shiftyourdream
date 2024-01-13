@@ -1,0 +1,51 @@
+/* TOP NAVBAR */
+.top-navbar{
+    width: 80% !important;
+    margin-left: 20%;
+}
+
+.top-navbar-container{
+    margin-left: 3% !important;
+}
+
+
+/* LEFT NAVBAR */
+.left-bar{
+    width: 20% !important;
+    border-right: 1px solid #dee2e6 !important;
+    
+}
+
+.left-bar-title{
+    font-family: 'Satisfy', cursive;
+    font-size: 25px;
+    color: #756AB6 !important;
+    padding-left: 0 !important;
+}
+
+
+/* CENTER CONTAINER */
+.center-container{
+    width: 80% !important;
+    margin-top: 4% !important;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .top-navbar{
+        width: 100% !important;
+        margin-left: 0%;
+    }
+    
+    .top-navbar-container{
+        margin-left: 0% !important;
+    }
+    
+    .left-bar{
+        width: 20% !important;
+    }
+    
+    .center-container{
+        width: 100% !important;
+    }
+}
