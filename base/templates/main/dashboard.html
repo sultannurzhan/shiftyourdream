@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="maincontainer">
+    <section class="px-lg-0 p-4 text-black vertical-home ms-lg-5">
+        <div class="">
+            <h3>Dashboard</h3>
+        </div>
+        <div class="">
+            <div>
+                <canvas id="myChart"></canvas>
+              </div>
+              
+        </div>
+    </section>
+</div>
+
+<div id="myDreams" data-mydreams="{{ my_dreams|safe }}"></div>
+<div id="averageDreams" data-mydreams="{{ average_dreams|safe }}"></div>
+
+<script>
+    var myDreams = document.getElementById('myDreams').dataset.mydreams;
+    var averageDreams = document.getElementById('averageDreams').dataset.mydreams;
+
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["My Dreams", "Average Users' Dreams"],
+      datasets: [{
+        label: 'Total Dreams',
+        data: [myDreams, averageDreams],
+        borderWidth: 1,
+        backgroundColor: [
+      '#756AB6',
+      '#AC87C5',
+    ]
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+    </script>
+
+
+{% endblock content %}

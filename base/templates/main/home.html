@@ -7,18 +7,20 @@
 
 <div class="maincontainer">
     <section class="px-lg-0 p-4 text-black vertical-home">
-        <div class="row">
-            <div class="col-lg-2 wrapper">
-              <li class="add-box" data-bs-toggle="modal" data-bs-target="#addNote">
-                  <div class="icon"><i class="uil uil-plus"></i></div>
-                  <p>Add new dream</p>
-              </li>       
+        <div class="row ms-lg-3">
+            <div class="dream-write-wrapper mb-4">
+                <div class="box-own-dream">
+                    <li class="add-box mt-5" data-bs-toggle="modal" data-bs-target="#addNote">
+                        <div class="icon"><i class="uil uil-plus"></i></div>
+                        <p>Add new dream</p>
+                    </li>       
+                </div>
             </div>
             {% for note in notes %}
-            <div class="col-lg-2 wrapper" id="note-{{note.id}}">
+            <div class="my-wrapper mb-4" id="note-{{note.id}}">
                 <div class="box-own-note">
                     <h4 class="">{{note.title|truncatechars:33}}</h4>
-                    <div class="overflow-auto" style="max-height: 130px;" data-title="{{note.title}}" id="bodyfield-{{note.id}}">
+                    <div class="overflow-auto {% if note.title|length > 20 %} max-height-110 {% else %} max-height-130 {% endif %}" data-title="{{ note.title }}" id="bodyfield-{{ note.id }}">
                         <p class="">{{note.body|linebreaks}}</p>
                     </div>
                 </div>

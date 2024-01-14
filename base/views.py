@@ -182,3 +182,13 @@ class About(View):
     def get(self, request):
         context = {}
         return render(request, 'main/about.html', context)
+    
+class Dashboard(View):
+    def get(self, request):
+        user = request.user
+        my_dreams = len(Note.objects.filter(user=user))
+        all_dreams = Note.objects.all()
+        users = User.objects.all()
+        average_dreams = len(all_dreams) / len(users)
+        context = {'my_dreams': my_dreams, 'average_dreams': average_dreams}
+        return render(request, 'main/dashboard.html', context)

@@ -21,10 +21,6 @@ class RegisterUserForm(UserCreationForm):
     )
 
 
-
-
-
-
 class NoteForm(forms.ModelForm):
     important = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 

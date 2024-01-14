@@ -24,4 +24,51 @@
     .maincontainer{
         width: 100% !important;
     }
+
+
+
+  .box-own-note{
+    height: 200px;
+    list-style: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 15px 20px 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .box-own-date{
+    height: 50px;
+    list-style: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px 20px 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+  }
+  
+  .box-own-dream{
+    height: 250px;
+    list-style: none;
+    border-radius: 5px;
+    padding: 15px 20px 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dream-write-wrapper{
+    max-width: 100% !important;
+  }
+  
+  .my-wrapper{
+    max-width: 100% !important;
+  }
+  
+
+
 }

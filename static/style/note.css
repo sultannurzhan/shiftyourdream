@@ -12,12 +12,10 @@
   background: #618cf8;
 }
 .wrapper{
-  margin-right: 50px;
   margin-top: 10px;
-  margin-left: 50px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 265px);
+  grid-template-columns: repeat(auto-fill, 280px);
 }
 .wrapper li{
   height: 250px;
@@ -28,28 +26,6 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-.box-own-note{
-  height: 200px;
-  list-style: none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  padding: 15px 20px 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-  border-bottom: 1px solid #ccc;
-}
-
-.box-own-date{
-  height: 50px;
-  list-style: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 15px 20px 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-}
 
 .add-box, .icon, .bottom-content, 
 .popup, header, .settings .menu li{
@@ -237,4 +213,56 @@ form button{
   .bottom-content .settings i{
     font-size: 17px;
   }
+}
+
+
+
+.box-own-note{
+  height: 200px;
+  list-style: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 15px 20px 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  word-wrap: break-word;
+  border-bottom: 1px solid #ccc;
+}
+
+.box-own-date{
+  height: 50px;
+  list-style: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 15px 20px 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  word-wrap: break-word;
+}
+
+.box-own-dream{
+  height: 250px;
+  list-style: none;
+  border-radius: 5px;
+  padding: 15px 20px 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  word-wrap: break-word;
+  border-bottom: 1px solid #ccc;
+}
+
+.dream-write-wrapper{
+  max-width: 300px;
+}
+
+.my-wrapper{
+  max-width: 300px;
+}
+
+.max-height-130{
+  max-height: 130px;
+}
+
+.max-height-110{
+  max-height: 110px;
 }

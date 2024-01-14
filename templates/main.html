@@ -27,6 +27,9 @@
         
         <!--Jquery-->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <!--Chart.js-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         
 
 
@@ -50,12 +53,12 @@
                         <ul class="nav flex-column ms-4" style="height: 100%;">
                             <li class="nav-item mt-3">
                                 <div class="d-flex justify-content-left">
-                                    <a class="nav-link active text-dark p-0" href="#">
+                                    <a class="nav-link active text-dark p-0" href="{% url 'dashboard' %}">
                                         <span class="material-symbols-outlined">
                                             dashboard
                                         </span>
                                     </a>
-                                    <a class="nav-link active text-dark p-0 ps-2" href="#">
+                                    <a class="nav-link active text-dark p-0 ps-2" href="{% url 'dashboard' %}">
                                         Dashboard
                                     </a>
                                 </div>
