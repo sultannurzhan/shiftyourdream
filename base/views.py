@@ -13,8 +13,13 @@ from django.db import transaction
 from .models import *
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.dateparse import parse_datetime
+from django.db.models.functions import TruncDate
+from datetime import timedelta
+from django.utils import timezone
+
 
 class LoginUser(View):
     def get(self, request):
@@ -186,9 +191,35 @@ class About(View):
 class Dashboard(View):
     def get(self, request):
         user = request.user
-        my_dreams = len(Note.objects.filter(user=user))
+        my_dreams = Note.objects.filter(user=user)
+        my_dreams_count = len(my_dreams)
         all_dreams = Note.objects.all()
         users = User.objects.all()
         average_dreams = len(all_dreams) / len(users)
-        context = {'my_dreams': my_dreams, 'average_dreams': average_dreams}
+
+        context = {
+            'my_dreams_count': my_dreams_count,
+            'average_dreams': average_dreams,
+        }
+
         return render(request, 'main/dashboard.html', context)
+    
+
+def historyGraph(request):
+    user = request.user
+    today = timezone.now()
+    last_days_total_dreams = []
+    last_days = []
+    date = today - timedelta(days=6)
+
+    for i in range(7):
+        current_dreams = Note.objects.filter(user=user, created__lt=date).count()
+        last_days_total_dreams.append(current_dreams)
+        formatted_date = date.strftime('%d %b')
+        last_days.append(formatted_date)
+        date = today - timedelta(days=(5 - i))
+
+    historyGraphLabels = last_days
+    historyGraphData = last_days_total_dreams
+
+    return JsonResponse({'historyGraphLabels': historyGraphLabels, 'historyGraphdata': historyGraphData})

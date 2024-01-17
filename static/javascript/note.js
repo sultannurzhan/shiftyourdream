@@ -71,9 +71,9 @@ $(document).ready(function() {
                 if (response.success) {
                     // Optional: Do something on success, e.g., show a success message
                     console.log(response.success);
-
+ 
                     // Remove the deleted note from the DOM
-                    $("#" + formId).closest('.wrapper').remove();
+                    $("#" + formId).closest('.my-wrapper').remove();
                 } else {
                     // Optional: Do something on failure, e.g., show an error message
                     console.log(response.error);

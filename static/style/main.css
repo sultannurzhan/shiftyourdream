@@ -16,6 +16,10 @@ a{
     margin-top: 10%;
 }
 
+.vertical-center-2{
+    margin-top: 5%;
+}
+
 .vertical-home{
     margin-top: 0%;
 }
@@ -125,4 +129,9 @@ a{
 .form-control:focus {
     border-color: #AC87C5 !important;
     box-shadow: 0 0 0 0.25rem #756AB6 !important;
+}
+
+.footer{
+    margin-bottom: 7%; 
+    margin-left: 3%;
 }

@@ -16,5 +16,6 @@ urlpatterns = [
     path('dreams/', views.Dreams.as_view(), name="dreams"),
     
     path('about/', views.About.as_view(), name="about"),
-    path('dashboard/', views.Dashboard.as_view(), name="dashboard")
+    path('dashboard/', views.Dashboard.as_view(), name="dashboard"),
+    path('history-graph/', views.historyGraph, name="history-graph")
 ]

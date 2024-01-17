@@ -12,6 +12,10 @@
     .vertical-center{
         margin-top: 30%;
     }
+
+    .vertical-center-2{
+      margin-top: 20%;
+  }
     
     .vertical-home{
         margin-top: 10%;
@@ -68,6 +72,11 @@
   .my-wrapper{
     max-width: 100% !important;
   }
+
+  .footer{
+    margin-bottom: 7%; 
+    margin-left: 7%;
+}
   
 
 
