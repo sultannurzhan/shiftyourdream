@@ -19,6 +19,8 @@ from django.utils.dateparse import parse_datetime
 from django.db.models.functions import TruncDate
 from datetime import timedelta
 from django.utils import timezone
+from django.contrib.auth.decorators import permission_required
+
 
 
 class LoginUser(View):
@@ -223,3 +225,37 @@ def historyGraph(request):
     historyGraphData = last_days_total_dreams
 
     return JsonResponse({'historyGraphLabels': historyGraphLabels, 'historyGraphdata': historyGraphData})
+
+
+class Notifications(View):
+    def get(self, request):
+        user = request.user
+        context = {}
+        return render(request, 'main/notifications.html', context)
+
+
+class Achievements(View):
+    def get(self, request):
+        user = request.user
+        context = {}
+        return render(request, 'main/achievements.html', context)
+
+@method_decorator(permission_required('change_user', raise_exception=True), name='dispatch')
+class Settings(View):
+    def get(self, request):
+        user = request.user
+        form = UserForm(instance=request.user)
+        context = {
+            'user': user,
+            'form': form
+        }
+        return render(request, 'main/settings.html', context)
+    
+    @transaction.atomic
+    def post(self, request):
+        form = UserForm(request.POST or None, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True})
+        context = {'form': form}
+        return render(request, 'main/settings.html', context)

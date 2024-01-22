@@ -47,3 +47,24 @@ class NoteForm(forms.ModelForm):
             self.fields['title'].required = False
 
         return cleaned_data
+    
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        help_texts = {
+            'username': None,
+            'email': None
+        }
+        labels = {
+            "username": "Username",
+            "email": "Email",
+            "first_name": "First Name",
+            "last_name": "Last Name"
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'readonly': True}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }

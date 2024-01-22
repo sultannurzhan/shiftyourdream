@@ -17,5 +17,9 @@ urlpatterns = [
     
     path('about/', views.About.as_view(), name="about"),
     path('dashboard/', views.Dashboard.as_view(), name="dashboard"),
-    path('history-graph/', views.historyGraph, name="history-graph")
+    path('history-graph/', views.historyGraph, name="history-graph"),
+
+    path('achievements/', views.Achievements.as_view(), name="achievements"),
+    path('notifcations/', views.Notifications.as_view(), name="notifications"),
+    path('settings/', views.Settings.as_view(), name="settings"),
 ]

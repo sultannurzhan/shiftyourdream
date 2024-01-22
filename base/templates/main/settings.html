@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="maincontainer">
+    <section class="px-lg-0 p-4 text-black vertical-home ms-lg-5">
+        <div class="">
+            <h3>Settings</h3>
+
+            
+            <div class="w-lg-50 mt-4">
+                <form method="POST" id="user-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-own-main w-100">Edit</button>
+                    <div id="success-message"></div>
+                </form>
+            </div>
+
+        </div>
+
+
+
+    </section>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Assuming your form has an ID of 'user-form'
+    $('#user-form').submit(function(e) {
+        e.preventDefault();
+
+        // Reset the success message before making a new request
+        var successMessage = $('#success-message');
+        successMessage.text('').css('color', '');
+
+        // Your AJAX request
+        $.ajax({
+            type: 'POST',
+            url: '{% url "settings" %}',  // Update with the actual URL
+            data: $(this).serialize(),
+            success: function(response) {
+                // Check if the response has a 'success' key
+                if (response.success) {
+                    // Show success message in green text
+                    successMessage.text('Form saved successfully').css('color', 'green');
+
+                    // Fade in and out smoothly
+                    successMessage.fadeIn('slow').fadeOut('slow');
+                } else {
+                    // Handle other scenarios if needed
+                    console.error('Unexpected response:', response);
+                }
+            },
+            error: function(error) {
+                // Handle AJAX errors
+                console.error('AJAX error:', error);
+            }
+        });
+    });
+});
+    </script>
+
+{% endblock content %}

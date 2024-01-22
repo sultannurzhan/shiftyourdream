@@ -2,29 +2,30 @@
 {% load static %}
 {% block content %}
 
-<style>
-  .dashboardContainer{
-    width: 50%;
-  }
-
-  @media only screen and (max-width: 767px) {
-    .dashboardContainer{
-      width: 100%;
-    }
-  }
-</style>
-
 <div class="maincontainer">
     <section class="px-lg-0 p-4 text-black vertical-home ms-lg-5">
         <div class="">
             <h3>Dashboard</h3>
         </div>
-        <div class="dashboardContainer">
+
+        <div class="informationContainer">
+          <div class="">
+            
+          </div>
+        </div>
+
+        <div class="w-lg-50">
             <div class="d-lg-flex justify-content-between">
+
+              <div class="border m-3 p-3">
+                <p>Total dreams count</p>
                 <canvas id="dreamsChart"></canvas>
+              </div>
+              <div class="border m-3 p-3">
+                <p>Total dreams for the last week</p>
                 <canvas id="historyGraph"></canvas>
+              </div>
             </div>
-              
         </div>
     </section>
 </div>
@@ -40,27 +41,31 @@
 
     const ctx = document.getElementById('dreamsChart');
     new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ["My Dreams", "Average Users' Dreams"],
-      datasets: [{
-        label: 'Total Dreams',
-        data: [myDreams, averageDreams],
-        borderWidth: 1,
-        backgroundColor: [
-      '#756AB6',
-      '#AC87C5',
-    ]
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+        type: 'bar',
+        data: {
+            labels: ["My Dreams", "Average Users' Dreams"],
+            datasets: [{
+                label: 'My Dreams',
+                data: [myDreams, averageDreams],
+                borderWidth: 1,
+                backgroundColor: [
+                    '#756AB6',
+                    '#AC87C5',
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            legend: {
+                display: false  // Set display to false to hide the legend
+            }
         }
-      }
-    }
-  });
+    });
+
 
 
   $(document).ready(function() {
