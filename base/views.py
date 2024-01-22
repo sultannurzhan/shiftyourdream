@@ -190,7 +190,8 @@ class About(View):
         context = {}
         return render(request, 'main/about.html', context)
     
-class Dashboard(View):
+class Dashboard(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request):
         user = request.user
         my_dreams = Note.objects.filter(user=user)
@@ -227,21 +228,24 @@ def historyGraph(request):
     return JsonResponse({'historyGraphLabels': historyGraphLabels, 'historyGraphdata': historyGraphData})
 
 
-class Notifications(View):
+class Notifications(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request):
         user = request.user
         context = {}
         return render(request, 'main/notifications.html', context)
 
 
-class Achievements(View):
+class Achievements(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request):
         user = request.user
         context = {}
         return render(request, 'main/achievements.html', context)
 
-@method_decorator(permission_required('change_user', raise_exception=True), name='dispatch')
-class Settings(View):
+#@method_decorator(permission_required('change_user', raise_exception=True), name='dispatch')
+class Settings(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request):
         user = request.user
         form = UserForm(instance=request.user)
