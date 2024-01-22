@@ -18,12 +18,14 @@
             </div>
             {% for note in notes %}
             <div class="my-wrapper mb-4" id="note-{{note.id}}">
-                <div class="box-own-note">
-                    <h4 class="">{{note.title|truncatechars:33}}</h4>
-                    <div class="overflow-auto {% if note.title|length > 20 %} max-height-110 {% else %} max-height-130 {% endif %}" data-title="{{ note.title }}" id="bodyfield-{{ note.id }}">
-                        <p class="">{{note.body|linebreaks}}</p>
+                <a class="text-dark" href="{% url 'dream-details' note.id %}">
+                    <div class="box-own-note">
+                        <h4 class="">{{note.title|truncatechars:33}}</h4>
+                        <div class="overflow-auto {% if note.title|length > 20 %} max-height-110 {% else %} max-height-130 {% endif %}" data-title="{{ note.title }}" id="bodyfield-{{ note.id }}">
+                            <p class="">{{note.body|linebreaks}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <div class="box-own-date d-flex justify-content-between {% if note.important == True %} bg-important {% endif %}">
                     <div class="">
                         <p class="">{{note.updated}}</p>

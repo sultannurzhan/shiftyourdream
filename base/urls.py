@@ -22,4 +22,6 @@ urlpatterns = [
     path('achievements/', views.Achievements.as_view(), name="achievements"),
     path('notifcations/', views.Notifications.as_view(), name="notifications"),
     path('settings/', views.Settings.as_view(), name="settings"),
+
+    path('dream/<int:pk>/', views.DreamDetails.as_view(), name="dream-details"),
 ]

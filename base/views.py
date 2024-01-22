@@ -264,4 +264,16 @@ class Settings(LoginRequiredMixin, View):
         else:
             errors = form.errors.as_json()
             return JsonResponse({'success': False, 'errors': errors})
-      
+
+
+class DreamDetails(LoginRequiredMixin, View):
+    login_url = 'login'
+    def get(self, request, pk):
+        user = request.user
+        dream = Note.objects.get(id=pk)
+
+        if user!=dream.user:
+            return redirect('home')
+        
+        context = {'user': user, 'dream': dream}
+        return render(request, 'main/dream-details.html', context)
