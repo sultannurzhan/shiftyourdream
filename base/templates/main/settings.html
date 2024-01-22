@@ -14,6 +14,7 @@
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-own-main w-100">Edit</button>
                     <div id="success-message"></div>
+                    <div id="error-message"></div>
                 </form>
             </div>
 
@@ -30,9 +31,11 @@ $(document).ready(function() {
     $('#user-form').submit(function(e) {
         e.preventDefault();
 
-        // Reset the success message before making a new request
+        // Reset both success and error messages before making a new request
         var successMessage = $('#success-message');
+        var errorMessage = $('#error-message');
         successMessage.text('').css('color', '');
+        errorMessage.text('').css('color', '');
 
         // Your AJAX request
         $.ajax({
@@ -45,20 +48,30 @@ $(document).ready(function() {
                     // Show success message in green text
                     successMessage.text('Form saved successfully').css('color', 'green');
 
-                    // Fade in and out smoothly
-                    successMessage.fadeIn('slow').fadeOut('slow');
+                    // Hide and then fade in and out smoothly with a longer duration (800 milliseconds)
+                    successMessage.hide().fadeIn(800).fadeOut(800);
                 } else {
-                    // Handle other scenarios if needed
-                    console.error('Unexpected response:', response);
+                    // Check if the email field has a validation error
+                    if (response.errors.email) {
+                        errorMessage.text(response.errors.email[0]).css('color', 'red');
+                    } else {
+                        // Display a generic error message for other fields
+                        errorMessage.text('Form submission failed. Please check the fields.').css('color', 'red');
+                    }
+
+                    // Hide and then fade in and out the error message with a longer duration (800 milliseconds)
+                    errorMessage.hide().fadeIn(800).fadeOut(800);
                 }
             },
-            error: function(error) {
-                // Handle AJAX errors
-                console.error('AJAX error:', error);
+            error: function(response) {
+                // Handle other AJAX errors
+                console.error('AJAX error:', response);
             }
         });
     });
 });
+
+
     </script>
 
 {% endblock content %}

@@ -261,5 +261,7 @@ class Settings(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return JsonResponse({'success': True})
-        context = {'form': form}
-        return render(request, 'main/settings.html', context)
+        else:
+            errors = form.errors.as_json()
+            return JsonResponse({'success': False, 'errors': errors})
+      
