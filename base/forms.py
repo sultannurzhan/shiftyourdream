@@ -21,11 +21,11 @@ class RegisterUserForm(UserCreationForm):
     )
 
 
-class NoteForm(forms.ModelForm):
+class DreamForm(forms.ModelForm):
     important = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
     class Meta:
-        model = Note
+        model = Dream
         fields = ['title', 'body', 'important']
         labels = {
             "body": "",
@@ -34,7 +34,7 @@ class NoteForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(NoteForm, self).__init__(*args, **kwargs)
+        super(DreamForm, self).__init__(*args, **kwargs)
         self.fields['title'].required = False
 
     def clean(self):

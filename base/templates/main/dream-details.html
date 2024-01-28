@@ -6,17 +6,91 @@
     .maincontainer{
         word-wrap: break-word;
     }
+
+   
+    .styled-input-title {
+        border: none;
+        font-size: 3rem; 
+        font-weight: bold;
+        display: inline;
+        outline: none; 
+        background: none; 
+        padding: 0;
+        margin: 0;
+    }
+
+    .styled-input-title:focus {
+        border: none;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .styled-input-title {
+            font-size: 2rem; 
+        }
+    }
+
+    .styled-input-body {
+        border: none;
+        font-size: 1rem; 
+        display: inline;
+        outline: none; 
+        background: none; 
+        padding: 0;
+        margin: 0;
+        resize: none; /* Prevent resizing */
+        min-height: auto;
+        width: 100%;
+    }
+
+    .styled-input-body:focus {
+        border: none;
+    }
+
+    h3 {
+        display: inline;
+    }
+
+    b {
+        font-weight: bold;
+    }
+
 </style>
 
 
 <div class="maincontainer d-flex justify-content-center">
     <section class="px-lg-0 p-4 text-black vertical-home ms-lg-5 w-lg-50">
-        <div class="mt-lg-5">
-            <h3><b>{{dream.title}}</b></h3>
-        </div>
-
+        
         <div class="">
-            <p>{{dream.body}}</p>
+
+            <div class="" id="editDream" data-dream-id="{{dream.id}}">
+                <form method="post" action="" id="editDreamForm">
+                    {% csrf_token %}
+                    
+                    <!-- Hidden input for the current page's URL -->
+                    <input type="hidden" name="current_url" value="{{ request.get_full_path }}">
+                    
+                    <div class="mt-lg-5">
+                        <h3><b><input type="text" name="title" id="editTitle" class="styled-input-title" placeholder="Title"></b></h3>
+                    </div>
+
+                    <textarea name="body" id="editBody" class="styled-input-body mt-2"></textarea>
+                    
+                    <!-- Checkbox for important field -->
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" name="important" id="editImportant">
+                        <label class="form-check-label" for="editImportant">
+                            Mark as Important
+                        </label>
+                    </div>
+                    
+                    <div class="d-flex mt-2">
+                        <button type="submit" class="btn btn-light bg-own-main text-white">Save Changes</button> 
+                        <small class="unsaved-text mt-2 ms-1" style="display: none;">(unsaved)</small>
+                    </div>
+                </form>
+            </div>
+
+
         </div>
 
         <div class="">
@@ -30,5 +104,112 @@
 
     </section>
 </div>
+
+<script>
+
+
+// To Get Previous Data and send the updated data to server    
+$(document).ready(function (){
+    function editDream(dreamId) {
+        $.ajax({
+            url: `/get_dream_details/${dreamId}/`,
+            method: 'GET',
+            success: function(data){
+                $('#editDream form').attr('action', `/edit_dream/${dreamId}/`);  // Update the form action
+                $('#editTitle').val(data.title);
+                $('#editBody').val(data.body);
+                $('#editImportant').prop('checked', data.important);
+            },
+            error: function (error) {
+                console.error('Error fetching dream details:', error);
+            }
+        });
+    }
+
+    // Extract dream ID from data attribute
+    var dreamId = $('#editDream').data('dream-id');
+
+    // Call the editDream function with the extracted dreamId
+    editDream(dreamId);
+});
+
+
+//---------- To Expand TextArea
+
+$(document).ready(function() {
+
+$('#editBody').on("focus", function(event) {
+
+    if(!$('#editBody').hasClass('customTextAreaClass')){
+
+        $('#editBody').addClass('customTextAreaClass');
+
+    }
+});
+
+$('#editBody').on("blur", function(event) {
+
+    if($('#editBody').hasClass('customTextAreaClass')){
+
+        $('#editBody').removeClass('customTextAreaClass');
+
+    }
+});
+});
+
+
+
+//------------ To Save Automatically
+
+$(document).ready(function (){
+        var originalFormValues = {}; // Object to store original form values
+
+        // Function to store original form values when the page loads
+        function storeOriginalFormValues() {
+            originalFormValues = {
+                title: $('#editTitle').val(),
+                body: $('#editBody').val(),
+                important: $('#editImportant').prop('checked')
+            };
+        }
+
+        // Function to compare current form values with original form values
+        function checkFormChanged() {
+            var currentFormValues = {
+                title: $('#editTitle').val(),
+                body: $('#editBody').val(),
+                important: $('#editImportant').prop('checked')
+            };
+
+            // Check if current form values are different from original form values
+            var formChanged = JSON.stringify(currentFormValues) !== JSON.stringify(originalFormValues);
+
+            // Show/hide unsaved indicator based on form changes
+            $('.unsaved-text').toggle(formChanged);
+        }
+
+        // Store original form values when the page loads
+        storeOriginalFormValues();
+
+        // Listen for input events on form fields
+        $('#editTitle, #editBody, #editImportant').on('input', function() {
+            checkFormChanged();
+        });
+
+        // Listen for submit event on form
+        $('#editDreamForm').submit(function() {
+            // Update original form values when the form is submitted
+            storeOriginalFormValues();
+            $('.unsaved-text').hide(); // Hide unsaved text
+        });
+
+        // Handle unsaved changes when user navigates away from the page
+        $(window).on('beforeunload', function() {
+            if ($('.unsaved-text').is(':visible')) {
+                return 'You have unsaved changes. Are you sure you want to leave this page?';
+            }
+        });
+    });
+</script>
 
 {% endblock content %}

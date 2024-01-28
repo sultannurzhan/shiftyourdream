@@ -8,10 +8,9 @@ urlpatterns = [
     path('register/', views.RegisterUser.as_view(), name="register"),
     path('logout/', views.logoutUser, name="logout"),
 
-    path('create_note/', views.create_note, name='create_note'),
-    path('delete-note/<int:pk>/', views.delete_note, name='delete_note'),
-    path('edit_note/<int:pk>/', views.edit_note, name='edit_note'),
-    path('get_note_details/<int:note_id>/', views.get_note_details, name='get_note_details'),
+    path('create_dream/', views.create_dream, name='create_dream'),
+    path('delete-dream/<int:pk>/', views.delete_dream, name='delete_dream'),
+    path('edit_dream/<int:pk>/', views.edit_dream, name='edit_dream'),
 
     path('dreams/', views.Dreams.as_view(), name="dreams"),
     
@@ -24,4 +23,5 @@ urlpatterns = [
     path('settings/', views.Settings.as_view(), name="settings"),
 
     path('dream/<int:pk>/', views.DreamDetails.as_view(), name="dream-details"),
+    path('get_dream_details/<int:dream_id>/', views.get_dream_details, name='get_dream_details'),
 ]

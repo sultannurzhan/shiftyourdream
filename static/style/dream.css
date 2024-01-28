@@ -52,28 +52,28 @@
   font-weight: 500;
   margin-top: 20px;
 }
-.note{
+.dream{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.note .details{
+.dream .details{
   max-height: 165px;
   overflow-y: auto;
 }
 
 
-.note p{
+.dream p{
   font-size: 22px;
   font-weight: 500;
 }
-.note span{
+.dream span{
   display: block;
   color: #575757;
   font-size: 16px;
   margin-top: 5px;
 }
-.note .bottom-content{
+.dream .bottom-content{
   padding-top: 10px;
   border-top: 1px solid #ccc;
 }
@@ -217,7 +217,7 @@ form button{
 
 
 
-.box-own-note{
+.box-own-dream2{
   height: 200px;
   list-style: none;
   border-top-left-radius: 5px;

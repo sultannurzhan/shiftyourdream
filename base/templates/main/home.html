@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'style/note.css' %}">
+<link rel="stylesheet" href="{% static 'style/dream.css' %}">
 <link rel="stylesheet" href="{% static 'style/dropdown.css' %}">
 
 <div class="maincontainer">
@@ -10,43 +10,43 @@
         <div class="row ms-lg-3">
             <div class="dream-write-wrapper mb-4">
                 <div class="box-own-dream">
-                    <li class="add-box mt-5" data-bs-toggle="modal" data-bs-target="#addNote">
+                    <li class="add-box mt-5" data-bs-toggle="modal" data-bs-target="#addDream">
                         <div class="icon"><i class="uil uil-plus"></i></div>
                         <p>Add new dream</p>
                     </li>       
                 </div>
             </div>
-            {% for note in notes %}
-            <div class="my-wrapper mb-4" id="note-{{note.id}}">
-                <a class="text-dark" href="{% url 'dream-details' note.id %}">
-                    <div class="box-own-note">
-                        <h4 class="">{{note.title|truncatechars:33}}</h4>
-                        <div class="overflow-auto {% if note.title|length > 20 %} max-height-110 {% else %} max-height-130 {% endif %}" data-title="{{ note.title }}" id="bodyfield-{{ note.id }}">
-                            <p class="">{{note.body|linebreaks}}</p>
+            {% for dream in dreams %}
+            <div class="my-wrapper mb-4" id="dream-{{dream.id}}">
+                <a class="text-dark" href="{% url 'dream-details' dream.id %}">
+                    <div class="box-own-dream2">
+                        <h4 class="">{{dream.title|truncatechars:33}}</h4>
+                        <div class="overflow-auto {% if dream.title|length > 20 %} max-height-110 {% else %} max-height-130 {% endif %}" data-title="{{ dream.title }}" id="bodyfield-{{ dream.id }}">
+                            <p class="">{{dream.body|linebreaks}}</p>
                         </div>
                     </div>
                 </a>
-                <div class="box-own-date d-flex justify-content-between {% if note.important == True %} bg-important {% endif %}">
+                <div class="box-own-date d-flex justify-content-between {% if dream.important == True %} bg-important {% endif %}">
                     <div class="">
-                        <p class="">{{note.updated}}</p>
+                        <p class="">{{dream.updated}}</p>
                     </div>
-                    <div class="dropdown" tabindex="0" id="note-dropdown" style="margin-top: -5px">
+                    <div class="dropdown" tabindex="0" id="dream-dropdown" style="margin-top: -5px">
                         <div class="dots">&ctdot;</div>
                         <div class="dropdown-menu shadow">
 
 
                             <button
                                 data-bs-toggle="modal"
-                                class="dropdown-item edit-note-btn"
-                                data-bs-target="#editNote"
-                                data-note-id="{{note.id}}">
+                                class="dropdown-item edit-dream-btn"
+                                data-bs-target="#editDream"
+                                data-dream-id="{{dream.id}}">
                                 Edit Dream
                             </button>
 
 
-                            <form id="delete-note-form-{{note.id}}" method="post" action="{% url 'delete_note' note.id %}">
+                            <form id="delete-dream-form-{{dream.id}}" method="post" action="{% url 'delete_dream' dream.id %}">
                                 {% csrf_token %}
-                                <button type="button" class="dropdown-item delete-note-btn" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</button>
+                                <button type="button" class="dropdown-item delete-dream-btn" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
         </div>
 
 
-        <!--DELETE NOTE MODAL-->
+        <!--DELETE Dream MODAL-->
         <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -76,8 +76,8 @@
       </div>
       <!------------------------>
           
-    <!--Add Note Modal-------------------->
-      <div class="modal fade" tabindex="-1" id="addNote">
+    <!--Add Dream Modal-------------------->
+      <div class="modal fade" tabindex="-1" id="addDream">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
-                    <form class="note-form" data-user-id="{{ request.user }}" data-home-url="{% url 'home' %}" method="post">
+                    <form class="dream-form" data-user-id="{{ request.user }}" data-home-url="{% url 'home' %}" method="post">
                         <input type="text" class="form-control" name="title" id="title" placeholder="Title (optional)">
                         <textarea name="body" id="body" class="form-control mt-2" rows="5" placeholder="Your dream goes here..." required></textarea>
 
@@ -111,8 +111,8 @@
 
 
 
-      <!--Edit Note Modal----------------->
-      <div class="modal fade" tabindex="-1" id="editNote">
+      <!--Edit Dream Modal----------------->
+      <div class="modal fade" tabindex="-1" id="editDream">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +120,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="" id="editNoteForm">
+                    <form method="post" action="" id="editDreamForm">
                         {% csrf_token %}
                         
                         <!-- Hidden input for the current page's URL -->
@@ -154,7 +154,7 @@
     </section>
     
 
-    <script src="{% static 'javascript/note.js' %}"></script>
+    <script src="{% static 'javascript/dream.js' %}"></script>
 </div>
 
 

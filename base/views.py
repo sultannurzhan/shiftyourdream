@@ -93,12 +93,12 @@ class Home(LoginRequiredMixin, View):
     login_url = 'login'
     def get(self, request):
         search_query = request.GET.get('q', '')
-        notes = Note.objects.filter(user=request.user).filter(
+        dreams = Dream.objects.filter(user=request.user).filter(
             Q(title__icontains=search_query)|
             Q(body__icontains=search_query)
         ).order_by('-created')
             
-        context = {'notes': notes}
+        context = {'dreams': dreams}
         return render(request, 'main/home.html', context)
     
 class Dreams(LoginRequiredMixin, View):
@@ -109,80 +109,79 @@ class Dreams(LoginRequiredMixin, View):
         sort_query = request.GET.get('sq', '')
 
         if sort_query == "":
-            notes = Note.objects.filter(user=request.user).order_by('-created')
+            dreams = Dream.objects.filter(user=request.user).order_by('-created')
         elif sort_query == "Modified":
-            notes = Note.objects.filter(user=request.user).order_by('-updated')
+            dreams = Dream.objects.filter(user=request.user).order_by('-updated')
         elif sort_query == "Important":
-            notes = Note.objects.filter(user=request.user, important=True).order_by('-created')
+            dreams = Dream.objects.filter(user=request.user, important=True).order_by('-created')
 
         if search_query != "":
-            notes = Note.objects.filter(user=request.user).filter(
+            dreams = Dream.objects.filter(user=request.user).filter(
                 Q(title__icontains=search_query)|
                 Q(body__icontains=search_query)
             ).order_by('-created')
 
-        context = {'notes': notes, 'sort_query': sort_query}
+        context = {'dreams': dreams, 'sort_query': sort_query}
         return render(request, 'main/dreams.html', context)
 
 
 @csrf_exempt  
-def create_note(request):
+def create_dream(request):
     if request.method == 'POST':
         user = request.user
         title = request.POST.get('title')
         body = request.POST.get('body')
         important = request.POST.get('important') == 'true' 
-        note = Note.objects.create(user=user, title=title, body=body, important=important)  
+        dream = Dream.objects.create(user=user, title=title, body=body, important=important)  
         print(request.POST.get('important'))
-        note_data = {
-            'id': note.id,
-            'title': note.title,
-            'body': note.body,
-            'created': note.created,
-            'updated': note.updated,
-            'user_id': note.user.id,
-            'important': note.important,  
+        dream_data = {
+            'id': dream.id,
+            'title': dream.title,
+            'body': dream.body,
+            'created': dream.created,
+            'updated': dream.updated,
+            'user_id': dream.user.id,
+            'important': dream.important,  
         }
-        return JsonResponse(note_data)
+        return JsonResponse(dream_data)
     else:
         return HttpResponseNotAllowed(['POST'])
 
 
-def delete_note(request, pk):
-    note = Note.objects.get(id=pk)
-    if request.user != note.user:
+def delete_dream(request, pk):
+    dream = Dream.objects.get(id=pk)
+    if request.user != dream.user:
         return redirect('home')
     if request.method == 'POST':    
-        note.delete()
+        dream.delete()
         return JsonResponse({'success': 'Post deleted successfully'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
     
-
-def get_note_details(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+def get_dream_details(request, dream_id):
+    dream = get_object_or_404(Dream, id=dream_id)
     data = {
-        'title': note.title,
-        'body': note.body,
-        'important': note.important, 
+        'title': dream.title,
+        'body': dream.body,
+        'important': dream.important
     }
     return JsonResponse(data)
 
-def edit_note(request, pk):
-    note = get_object_or_404(Note, pk=pk)
+def edit_dream(request, pk):
+    dream = get_object_or_404(Dream, pk=pk)
 
     if request.method == 'POST':
-        form = NoteForm(request.POST, instance=note)
+        form = DreamForm(request.POST, instance=dream)
         if form.is_valid():
             form.save()
             current_url = request.POST.get('current_url')
             return redirect(current_url)
 
     else:
-        initial_important = note.important
-        form = NoteForm(instance=note, initial={'important': initial_important})
+        initial_important = dream.important
+        form = DreamForm(instance=dream, initial={'important': initial_important})
 
-    return render(request, 'your_template.html', {'form': form, 'note_id': note.id})
+    return render(request, 'main/home.html', {'form': form, 'dream_id': dream.id})
 
 
 class About(View):
@@ -194,9 +193,9 @@ class Dashboard(LoginRequiredMixin, View):
     login_url = 'login'
     def get(self, request):
         user = request.user
-        my_dreams = Note.objects.filter(user=user)
+        my_dreams = Dream.objects.filter(user=user)
         my_dreams_count = len(my_dreams)
-        all_dreams = Note.objects.all()
+        all_dreams = Dream.objects.all()
         users = User.objects.all()
         average_dreams = len(all_dreams) / len(users)
 
@@ -216,7 +215,7 @@ def historyGraph(request):
     date = today - timedelta(days=6)
 
     for i in range(7):
-        current_dreams = Note.objects.filter(user=user, created__lt=date).count()
+        current_dreams = Dream.objects.filter(user=user, created__lt=date).count()
         last_days_total_dreams.append(current_dreams)
         formatted_date = date.strftime('%d %b')
         last_days.append(formatted_date)
@@ -265,15 +264,15 @@ class Settings(LoginRequiredMixin, View):
             errors = form.errors.as_json()
             return JsonResponse({'success': False, 'errors': errors})
 
-
 class DreamDetails(LoginRequiredMixin, View):
     login_url = 'login'
+
     def get(self, request, pk):
         user = request.user
-        dream = Note.objects.get(id=pk)
+        dream = Dream.objects.get(id=pk)
 
-        if user!=dream.user:
+        if user != dream.user:
             return redirect('home')
-        
+
         context = {'user': user, 'dream': dream}
         return render(request, 'main/dream-details.html', context)

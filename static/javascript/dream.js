@@ -1,19 +1,19 @@
-//Create Note Function ------------------------------------------------------------------------------------------------
-$('.note-form').submit(function(event) {
+//Create Dream Function ------------------------------------------------------------------------------------------------
+$('.dream-form').submit(function(event) {
     event.preventDefault();  // Prevent the default form submission
 
-    var noteForm = $(this);
-    var title = noteForm.find('#title').val();
-    var body = noteForm.find('#body').val();
-    var userId = noteForm.data('user-id');
-    var csrfToken = noteForm.find('input[name=csrfmiddlewaretoken]').val();
-    var homeUrl = noteForm.data('home-url');
-    var important = noteForm.find('#important').prop('checked');  // Check if the checkbox is checked
+    var dreamForm = $(this);
+    var title = dreamForm.find('#title').val();
+    var body = dreamForm.find('#body').val();
+    var userId = dreamForm.data('user-id');
+    var csrfToken = dreamForm.find('input[name=csrfmiddlewaretoken]').val();
+    var homeUrl = dreamForm.data('home-url');
+    var important = dreamForm.find('#important').prop('checked');  // Check if the checkbox is checked
 
     
 
     $.ajax({
-        url: 'create_note/',
+        url: 'create_dream/',
         type: 'POST',
         data: {
             'csrfmiddlewaretoken': csrfToken,
@@ -72,7 +72,7 @@ $(document).ready(function() {
                     // Optional: Do something on success, e.g., show a success message
                     console.log(response.success);
  
-                    // Remove the deleted note from the DOM
+                    // Remove the deleted dream from the DOM
                     $("#" + formId).closest('.my-wrapper').remove();
                 } else {
                     // Optional: Do something on failure, e.g., show an error message
@@ -87,7 +87,7 @@ $(document).ready(function() {
     });
 
     // Attach the form ID to the modal's delete button
-    $(".delete-note-btn").click(function() {
+    $(".delete-dream-btn").click(function() {
         var formId = $(this).closest('form').attr('id');
         $("#confirmDeleteBtn").data('form-id', formId);
     });
@@ -98,35 +98,35 @@ $(document).ready(function() {
 
 
 
-//Edit Note Function -------------------------------------------------------------------------------------------------
+//Edit Dream Function -------------------------------------------------------------------------------------------------
 $(document).ready(function () {
     // Function to update the modal content
-    function updateEditNoteModal(noteId) {
-        // Use Ajax to fetch the note details
+    function updateEditDreamModal(dreamId) {
+        // Use Ajax to fetch the dream details
         $.ajax({
-            url: `/get_note_details/${noteId}/`,  // Update the URL to fetch note details
+            url: `/get_dream_details/${dreamId}/`,  // Update the URL to fetch dream details
             method: 'GET',
             success: function (data) {
-                // Update the modal content with note details
-                $('#editNote .modal-title').text('Edit Dream');
-                $('#editNote form').attr('action', `/edit_note/${noteId}/`);  // Update the form action
-                $('#editNote #editTitle').val(data.title);
-                $('#editNote #editBody').val(data.body);
+                // Update the modal content with dream details
+                $('#editDream .modal-title').text('Edit Dream');
+                $('#editDream form').attr('action', `/edit_dream/${dreamId}/`);  // Update the form action
+                $('#editDream #editTitle').val(data.title);
+                $('#editDream #editBody').val(data.body);
 
                 // Set the state of the "important" checkbox
-                var importantCheckbox = $('#editNote #editImportant');
+                var importantCheckbox = $('#editDream #editImportant');
                 importantCheckbox.prop('checked', data.important);
             },
             error: function (error) {
-                console.error('Error fetching note details:', error);
+                console.error('Error fetching dream details:', error);
             }
         });
     }
 
-    // Event listener for the edit note buttons
-    $('.edit-note-btn').on('click', function () {
-        var noteId = $(this).data('note-id');
-        updateEditNoteModal(noteId);
+    // Event listener for the edit dream buttons
+    $('.edit-dream-btn').on('click', function () {
+        var dreamId = $(this).data('dream-id');
+        updateEditDreamModal(dreamId);
     });
 });
 
