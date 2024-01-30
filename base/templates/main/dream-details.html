@@ -17,6 +17,9 @@
         background: none; 
         padding: 0;
         margin: 0;
+        resize: none; /* Prevent resizing */
+        height: 10px;
+        width: 100%;
     }
 
     .styled-input-title:focus {
@@ -54,6 +57,7 @@
         font-weight: bold;
     }
 
+
 </style>
 
 
@@ -70,7 +74,7 @@
                     <input type="hidden" name="current_url" value="{{ request.get_full_path }}">
                     
                     <div class="mt-lg-5">
-                        <h3><b><input type="text" name="title" id="editTitle" class="styled-input-title" placeholder="Title"></b></h3>
+                        <h3><b><textarea type="text" name="title" id="editTitle" class="styled-input-title" placeholder="Title"></textarea></b></h3>
                     </div>
 
                     <textarea name="body" id="editBody" class="styled-input-body mt-2"></textarea>
@@ -131,30 +135,6 @@ $(document).ready(function (){
 
     // Call the editDream function with the extracted dreamId
     editDream(dreamId);
-});
-
-
-//---------- To Expand TextArea
-
-$(document).ready(function() {
-
-$('#editBody').on("focus", function(event) {
-
-    if(!$('#editBody').hasClass('customTextAreaClass')){
-
-        $('#editBody').addClass('customTextAreaClass');
-
-    }
-});
-
-$('#editBody').on("blur", function(event) {
-
-    if($('#editBody').hasClass('customTextAreaClass')){
-
-        $('#editBody').removeClass('customTextAreaClass');
-
-    }
-});
 });
 
 
